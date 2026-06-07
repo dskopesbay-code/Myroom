@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyRoom — админка брони</title>
+  <style>
+    :root {
+      --bg: #fff8ef;
+      --surface: #ffffff;
+      --text: #25201d;
+      --muted: #6f6258;
+      --accent: #ff6b4a;
+      --yellow: #ffe29a;
+      --line: rgba(37, 32, 29, 0.12);
+      --shadow: 0 18px 50px rgba(89, 55, 33, 0.12);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(255, 226, 154, 0.8), transparent 28rem),
+        radial-gradient(circle at 90% 12%, rgba(255, 212, 223, 0.8), transparent 28rem),
+        var(--bg);
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .page {
+      width: min(100% - 32px, 1120px);
+      margin: 0 auto;
+      padding: 36px 0 60px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), #ffb347);
+      color: #ffffff;
+    }
+
+    .panel {
+      padding: clamp(22px, 4vw, 34px);
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.84);
+      box-shadow: var(--shadow);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 5vw, 46px);
+      line-height: 1.05;
+    }
+
+    h2 {
+      margin: 0 0 8px;
+      font-size: 28px;
+    }
+
+    p {
+      color: var(--muted);
+    }
+
+    .login {
+      max-width: 460px;
+      margin: 70px auto 0;
+    }
+
+    .form {
+      display: grid;
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    label {
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    input {
+      min-height: 52px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #ffffff;
+      color: var(--text);
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(255, 107, 74, 0.14);
+    }
+
+    .button {
+      min-height: 48px;
+      padding: 13px 20px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 850;
+      cursor: pointer;
+      box-shadow: 0 14px 28px rgba(255, 107, 74, 0.22);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      background: #e95334;
+      box-shadow: 0 18px 36px rgba(255, 107, 74, 0.28);
+    }
+
+    .button.secondary {
+      background: var(--yellow);
+      color: var(--text);
+      box-shadow: 0 12px 24px rgba(255, 190, 70, 0.22);
+    }
+
+    .status {
+      min-height: 24px;
+      margin: 0;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .summary-card {
+      padding: 18px;
+      border-radius: 18px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+    }
+
+    .summary-card strong {
+      display: block;
+      color: var(--accent);
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .summary-card span {
+      color: var(--muted);
+      font-weight: 750;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #ffffff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 920px;
+    }
+
+    th,
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #fff6ea;
+      font-size: 13px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .booking-id {
+      font-weight: 900;
+      color: var(--accent);
+    }
+
+    .empty {
+      padding: 30px;
+      border-radius: var(--radius);
+      background: #ffffff;
+      color: var(--muted);
+      text-align: center;
+      font-weight: 800;
+    }
+
+    @media (max-width: 760px) {
+      .topbar,
+      .toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .summary {
+        grid-template-columns: 1fr;
+      }
+
+      .toolbar-actions,
+      .toolbar-actions .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="panel login" id="loginPanel">
+      <div class="brand">
+        <span class="brand-mark">M</span>
+        <span>MyRoom</span>
+      </div>
+      <h1>Вход администратора</h1>
+      <p>Введите логин и пароль, чтобы открыть список заявок на бронь.</p>
+
+      <form class="form" id="loginForm">
+        <label>
+          Логин
+          <input name="username" autocomplete="username" required>
+        </label>
+        <label>
+          Пароль
+          <input name="password" type="password" autocomplete="current-password" required>
+        </label>
+        <button class="button" type="submit">Войти</button>
+        <p class="status" id="loginStatus" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="panel hidden" id="adminPanel">
+      <div class="topbar">
+        <div>
+          <div class="brand">
+            <span class="brand-mark">M</span>
+            <span>MyRoom</span>
+          </div>
+          <h1>Список брони</h1>
+        </div>
+        <div class="toolbar-actions">
+          <button class="button secondary" id="refreshButton" type="button">Обновить</button>
+          <button class="button" id="logoutButton" type="button">Выйти</button>
+        </div>
+      </div>
+
+      <div class="summary">
+        <div class="summary-card">
+          <strong id="totalBookings">0</strong>
+          <span>всего заявок</span>
+        </div>
+        <div class="summary-card">
+          <strong id="todayBookings">0</strong>
+          <span>на сегодня</span>
+        </div>
+        <div class="summary-card">
+          <strong id="futureBookings">0</strong>
+          <span>предстоящих</span>
+        </div>
+      </div>
+
+      <div id="emptyState" class="empty hidden">Пока нет заявок на бронь.</div>
+
+      <div class="table-wrap" id="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>№</th>
+              <th>Дата заявки</th>
+              <th>Гость</th>
+              <th>Телефон</th>
+              <th>Филиал</th>
+              <th>Формат</th>
+              <th>Бронь</th>
+              <th>Гостей</th>
+              <th>Комментарий</th>
+            </tr>
+          </thead>
+          <tbody id="bookingsBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const loginPanel = document.querySelector('#loginPanel');
+    const adminPanel = document.querySelector('#adminPanel');
+    const loginForm = document.querySelector('#loginForm');
+    const loginStatus = document.querySelector('#loginStatus');
+    const bookingsBody = document.querySelector('#bookingsBody');
+    const refreshButton = document.querySelector('#refreshButton');
+    const logoutButton = document.querySelector('#logoutButton');
+    const emptyState = document.querySelector('#emptyState');
+    const tableWrap = document.querySelector('#tableWrap');
+    const totalBookings = document.querySelector('#totalBookings');
+    const todayBookings = document.querySelector('#todayBookings');
+    const futureBookings = document.querySelector('#futureBookings');
+
+    function formatDateTime(value) {
+      if (!value) {
+        return '';
+      }
+
+      return new Intl.DateTimeFormat('ru-RU', {
+        dateStyle: 'medium',
+        timeStyle: 'short'
+      }).format(new Date(value));
+    }
+
+    function escapeHtml(value) {
+      return String(value || '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    function renderBookings(bookings) {
+      const today = new Date().toISOString().slice(0, 10);
+      const total = bookings.length;
+      const todayCount = bookings.filter((booking) => booking.date === today).length;
+      const futureCount = bookings.filter((booking) => booking.date >= today).length;
+
+      totalBookings.textContent = total;
+      todayBookings.textContent = todayCount;
+      futureBookings.textContent = futureCount;
+
+      emptyState.classList.toggle('hidden', total > 0);
+      tableWrap.classList.toggle('hidden', total === 0);
+
+      bookingsBody.innerHTML = bookings.map((booking) => `
+        <tr>
+          <td class="booking-id">${escapeHtml(booking.id)}</td>
+          <td>${formatDateTime(booking.createdAt)}</td>
+          <td>${escapeHtml(booking.name)}</td>
+          <td>${escapeHtml(booking.phone)}</td>
+          <td>${escapeHtml(booking.branch)}</td>
+          <td>${escapeHtml(booking.eventType)}</td>
+          <td>${escapeHtml(booking.date)} ${escapeHtml(booking.time)}<br>${escapeHtml(booking.duration)}</td>
+          <td>${escapeHtml(booking.guests)}</td>
+          <td>${escapeHtml(booking.comment || '—')}</td>
+        </tr>
+      `).join('');
+    }
+
+    async function loadBookings() {
+      const response = await fetch('/api/admin/bookings');
+
+      if (response.status === 401) {
+        loginPanel.classList.remove('hidden');
+        adminPanel.classList.add('hidden');
+        return;
+      }
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Не удалось загрузить заявки');
+      }
+
+      loginPanel.classList.add('hidden');
+      adminPanel.classList.remove('hidden');
+      renderBookings(result.bookings);
+    }
+
+    loginForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      loginStatus.textContent = 'Проверяем доступ...';
+
+      const payload = Object.fromEntries(new FormData(loginForm).entries());
+      const response = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        loginStatus.textContent = result.message || 'Не удалось войти';
+        return;
+      }
+
+      loginStatus.textContent = '';
+      loginForm.reset();
+      await loadBookings();
+    });
+
+    refreshButton.addEventListener('click', () => {
+      loadBookings().catch((error) => {
+        alert(error.message);
+      });
+    });
+
+    logoutButton.addEventListener('click', async () => {
+      await fetch('/api/admin/logout', { method: 'POST' });
+      adminPanel.classList.add('hidden');
+      loginPanel.classList.remove('hidden');
+    });
+
+    loadBookings().catch(() => {
+      loginPanel.classList.remove('hidden');
+      adminPanel.classList.add('hidden');
+    });
+  </script>
+</body>
+</html>
