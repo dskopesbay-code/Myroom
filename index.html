@@ -661,6 +661,74 @@
       border-color: rgba(255, 255, 255, 0.42);
     }
 
+    .booking-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      max-width: 860px;
+      margin: 30px auto 0;
+      text-align: left;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .form-field.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-field label {
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      min-height: 52px;
+      padding: 14px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.46);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--text);
+      font: inherit;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .form-field textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      border-color: #ffffff;
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.22);
+    }
+
+    .booking-form .button {
+      width: fit-content;
+      min-width: 230px;
+      justify-self: center;
+      grid-column: 1 / -1;
+    }
+
+    .form-status {
+      min-height: 26px;
+      margin: 2px 0 0;
+      grid-column: 1 / -1;
+      color: #ffffff;
+      font-weight: 800;
+      text-align: center;
+    }
+
     .site-footer {
       padding: 34px 0;
       border-top: 1px solid var(--line);
@@ -805,6 +873,14 @@
       .actions,
       .cta-panel .actions {
         display: grid;
+      }
+
+      .booking-form {
+        grid-template-columns: 1fr;
+      }
+
+      .booking-form .button {
+        width: 100%;
       }
 
       .button {
@@ -1095,11 +1171,76 @@
       <div class="container">
         <div class="cta-panel">
           <h2>Забронируйте MyRoom для вашей встречи уже сегодня</h2>
-          <p>Выберите филиал, дату и формат отдыха — мы поможем организовать всё остальное.</p>
-          <div class="actions">
-            <a class="button" href="https://wa.me/77000000000">Написать в WhatsApp</a>
-            <a class="button secondary" href="tel:+77000000000">Позвонить</a>
-          </div>
+          <p>Заполните форму — администратор получит заявку и свяжется с вами для подтверждения брони.</p>
+
+          <form class="booking-form" id="bookingForm">
+            <div class="form-field">
+              <label for="name">Ваше имя</label>
+              <input id="name" name="name" type="text" placeholder="Например, Алина" required>
+            </div>
+
+            <div class="form-field">
+              <label for="phone">Телефон</label>
+              <input id="phone" name="phone" type="tel" placeholder="+7 700 000 00 00" required>
+            </div>
+
+            <div class="form-field">
+              <label for="branch">Филиал</label>
+              <select id="branch" name="branch" required>
+                <option value="">Выберите филиал</option>
+                <option value="Алматы — филиал 1">Алматы — филиал 1</option>
+                <option value="Алматы — филиал 2">Алматы — филиал 2</option>
+                <option value="Астана — филиал 3">Астана — филиал 3</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="eventType">Формат отдыха</label>
+              <select id="eventType" name="eventType" required>
+                <option value="">Выберите формат</option>
+                <option value="Встреча с друзьями">Встреча с друзьями</option>
+                <option value="День рождения">День рождения</option>
+                <option value="Корпоратив">Корпоратив</option>
+                <option value="Семейный праздник">Семейный праздник</option>
+                <option value="Турнир или игра">Турнир или игра</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="date">Дата</label>
+              <input id="date" name="date" type="date" required>
+            </div>
+
+            <div class="form-field">
+              <label for="time">Время</label>
+              <input id="time" name="time" type="time" required>
+            </div>
+
+            <div class="form-field">
+              <label for="guests">Количество гостей</label>
+              <input id="guests" name="guests" type="number" min="1" max="80" placeholder="Например, 8" required>
+            </div>
+
+            <div class="form-field">
+              <label for="duration">Длительность</label>
+              <select id="duration" name="duration" required>
+                <option value="">Выберите время</option>
+                <option value="1 час">1 час</option>
+                <option value="2 часа">2 часа</option>
+                <option value="3 часа">3 часа</option>
+                <option value="4 часа">4 часа</option>
+                <option value="Весь вечер">Весь вечер</option>
+              </select>
+            </div>
+
+            <div class="form-field full">
+              <label for="comment">Комментарий</label>
+              <textarea id="comment" name="comment" placeholder="Напишите, нужна ли VIP-комната, караоке, PlayStation или помощь с праздником"></textarea>
+            </div>
+
+            <button class="button" type="submit">Отправить заявку</button>
+            <p class="form-status" id="bookingStatus" aria-live="polite"></p>
+          </form>
         </div>
       </div>
     </section>
@@ -1123,6 +1264,8 @@
   <script>
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
+    const bookingForm = document.querySelector('#bookingForm');
+    const bookingStatus = document.querySelector('#bookingStatus');
 
     menuToggle.addEventListener('click', () => {
       const isOpen = document.body.classList.toggle('menu-open');
@@ -1135,6 +1278,40 @@
         document.body.classList.remove('menu-open');
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.setAttribute('aria-label', 'Открыть меню');
+      }
+    });
+
+    bookingForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const submitButton = bookingForm.querySelector('button[type="submit"]');
+      const formData = new FormData(bookingForm);
+      const payload = Object.fromEntries(formData.entries());
+
+      bookingStatus.textContent = 'Отправляем заявку...';
+      submitButton.disabled = true;
+
+      try {
+        const response = await fetch('/api/bookings', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.message || 'Не удалось отправить заявку');
+        }
+
+        bookingForm.reset();
+        bookingStatus.textContent = `Заявка №${result.booking.id} принята. Мы свяжемся с вами для подтверждения.`;
+      } catch (error) {
+        bookingStatus.textContent = `${error.message}. Попробуйте еще раз.`;
+      } finally {
+        submitButton.disabled = false;
       }
     });
   </script>
