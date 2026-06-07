@@ -248,6 +248,57 @@
       padding: 74px 0 92px;
     }
 
+    .info-strip {
+      border-bottom: 1px solid var(--line);
+      background: rgba(0, 0, 0, 0.58);
+      backdrop-filter: blur(14px);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      overflow: hidden;
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+    }
+
+    .info-item {
+      min-height: 86px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 16px 18px;
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .info-icon {
+      flex: 0 0 auto;
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(255, 196, 0, 0.13);
+      color: var(--yellow);
+      font-size: 20px;
+    }
+
+    .info-item span {
+      display: block;
+      color: rgba(255, 255, 255, 0.58);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .info-item strong {
+      display: block;
+      color: #ffffff;
+      font-size: 16px;
+      line-height: 1.22;
+    }
+
     .hero-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.02fr) minmax(330px, 0.78fr);
@@ -401,6 +452,56 @@
       text-align: center;
     }
 
+    .explain-panel {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .explain-copy,
+    .included-panel {
+      padding: clamp(26px, 4vw, 42px);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.075);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .explain-copy h2,
+    .included-panel h2 {
+      margin-bottom: 16px;
+    }
+
+    .included-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .included-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 66px;
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(0, 0, 0, 0.22);
+      font-weight: 850;
+    }
+
+    .included-item span {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: var(--yellow);
+      color: #0b0b0b;
+    }
+
     h2 {
       margin-bottom: 14px;
       font-size: clamp(30px, 4vw, 46px);
@@ -538,6 +639,73 @@
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 18px;
+    }
+
+    .rent-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .rent-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.045));
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .rent-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 196, 0, 0.34);
+      box-shadow: var(--shadow);
+    }
+
+    .rent-card h3 {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .rent-card p {
+      color: var(--muted);
+    }
+
+    .rent-price {
+      margin: auto 0 18px;
+      color: var(--yellow);
+      font-size: 24px;
+      font-weight: 950;
+    }
+
+    .booking-steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .step-card {
+      position: relative;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.075);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      border-radius: 14px;
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 950;
     }
 
     .stat {
@@ -854,8 +1022,15 @@
       }
 
       .grid.three,
-      .grid.six {
+      .grid.six,
+      .rent-grid,
+      .booking-steps {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .info-grid,
+      .explain-panel {
+        grid-template-columns: 1fr;
       }
 
       .stats-grid {
@@ -949,7 +1124,10 @@
 
       .grid.three,
       .grid.six,
-      .stats-grid {
+      .stats-grid,
+      .rent-grid,
+      .booking-steps,
+      .included-list {
         grid-template-columns: 1fr;
       }
 
@@ -983,10 +1161,10 @@
 
       <nav class="nav-links" aria-label="Главное меню">
         <a href="#about">О нас</a>
-        <a href="#entertainment">Развлечения</a>
+        <a href="#entertainment">Что есть</a>
         <a href="#events">Мероприятия</a>
         <a href="#branches">Филиалы</a>
-        <a href="#contacts">Контакты</a>
+        <a href="#contacts">Бронь</a>
         <a class="mobile-admin-link" href="/admin">Вход админа</a>
       </nav>
 
@@ -1002,6 +1180,39 @@
       </button>
     </div>
   </header>
+
+  <section class="info-strip" aria-label="Короткая информация о MyRoom">
+    <div class="container info-grid">
+      <div class="info-item">
+        <div class="info-icon">⌂</div>
+        <div>
+          <span>Города</span>
+          <strong>Алматы и Астана</strong>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">◷</div>
+        <div>
+          <span>Работаем</span>
+          <strong>ежедневно, время placeholder</strong>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">★</div>
+        <div>
+          <span>Формат</span>
+          <strong>комнаты, игры, праздники</strong>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">☎</div>
+        <div>
+          <span>Бронь</span>
+          <strong>через форму на сайте</strong>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <main id="top">
     <section class="hero" id="about">
@@ -1024,6 +1235,29 @@
               <span>🎮</span>
             </div>
             <div class="feature-strip">Настольные игры • Караоке • PlayStation • VIP-комнаты</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container explain-panel">
+        <div class="explain-copy">
+          <h2>Что такое антикафе MyRoom</h2>
+          <p>Это пространство, где гости платят за время и свободно пользуются комнатами, играми и развлечениями. Можно прийти поработать, встретиться с друзьями, провести день рождения или собрать команду на неформальный корпоратив.</p>
+          <p>Главная идея простая: меньше экранов и спешки, больше живого общения, игр и теплой атмосферы офлайн.</p>
+        </div>
+
+        <div class="included-panel">
+          <h2>В стоимость входят</h2>
+          <p>Базовый набор развлечений и уюта уже внутри формата MyRoom.</p>
+          <div class="included-list">
+            <div class="included-item"><span>☕</span>Чай и печенье</div>
+            <div class="included-item"><span>🎲</span>Настольные игры</div>
+            <div class="included-item"><span>🎮</span>PlayStation</div>
+            <div class="included-item"><span>🎤</span>Караоке</div>
+            <div class="included-item"><span>🎱</span>Бильярд</div>
+            <div class="included-item"><span>＋</span>И многое другое</div>
           </div>
         </div>
       </div>
@@ -1144,6 +1378,68 @@
             <h2>Наша миссия</h2>
             <p class="mission-text">Мы создаем безопасное и комфортное пространство для живого общения, где друзья, семьи, коллеги и близкие люди проводят время вместе, укрепляют отношения и получают яркие эмоции в атмосфере офлайн-взаимодействия.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>Как забронировать комнату</h2>
+          <p>Процесс простой: вы оставляете заявку на сайте, а администратор подтверждает детали и помогает подобрать формат.</p>
+        </div>
+
+        <div class="booking-steps">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h3>Выберите филиал</h3>
+            <p>Алматы или Астана, удобная дата и примерное время визита.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h3>Укажите формат</h3>
+            <p>Встреча друзей, день рождения, корпоратив, семейный праздник или турнир.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <h3>Отправьте заявку</h3>
+            <p>Форма ниже сразу попадет в список брони для администратора.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <h3>Получите подтверждение</h3>
+            <p>Мы свяжемся с вами и уточним комнату, время и детали события.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>Какие есть виды аренды</h2>
+          <p>Структура блока сделана как в референсе: короткие карточки форматов, понятная вместимость и быстрый переход к брони.</p>
+        </div>
+
+        <div class="rent-grid">
+          <article class="rent-card">
+            <h3>VIP-комната</h3>
+            <p>Для небольших компаний, свиданий, караоке, PlayStation и спокойных встреч без лишнего шума.</p>
+            <div class="rent-price">от placeholder ₸/час</div>
+            <a class="button" href="#contacts">Забронировать</a>
+          </article>
+          <article class="rent-card">
+            <h3>Праздничная комната</h3>
+            <p>Для дней рождения, школьных мероприятий, семейных праздников и компаний среднего размера.</p>
+            <div class="rent-price">от placeholder ₸/час</div>
+            <a class="button" href="#contacts">Забронировать</a>
+          </article>
+          <article class="rent-card">
+            <h3>Филиал под событие</h3>
+            <p>Для корпоративов, турниров, мафии и крупных мероприятий с отдельным сценарием отдыха.</p>
+            <div class="rent-price">индивидуально</div>
+            <a class="button" href="#contacts">Оставить заявку</a>
+          </article>
         </div>
       </div>
     </section>
