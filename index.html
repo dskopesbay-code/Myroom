@@ -7,21 +7,21 @@
   <title>MyRoom — место для друзей</title>
   <style>
     :root {
-      --bg: #fff8ef;
-      --bg-soft: #fff1dd;
-      --surface: #ffffff;
-      --surface-warm: #fff6ea;
-      --text: #25201d;
-      --muted: #6f6258;
-      --accent: #ff6b4a;
-      --accent-dark: #e95334;
-      --mint: #bde8d3;
-      --yellow: #ffe29a;
-      --pink: #ffd4df;
-      --blue: #cfe6ff;
-      --line: rgba(37, 32, 29, 0.1);
-      --shadow: 0 18px 50px rgba(89, 55, 33, 0.12);
-      --shadow-soft: 0 12px 30px rgba(89, 55, 33, 0.09);
+      --bg: #070707;
+      --bg-soft: #121212;
+      --surface: #171717;
+      --surface-warm: #211c12;
+      --text: #ffffff;
+      --muted: #cfcfcf;
+      --accent: #ff3030;
+      --accent-dark: #d91f1f;
+      --yellow: #ffc400;
+      --yellow-soft: #ffe07a;
+      --cream: #fff8e6;
+      --charcoal: #0f0f0f;
+      --line: rgba(255, 255, 255, 0.13);
+      --shadow: 0 22px 60px rgba(0, 0, 0, 0.38);
+      --shadow-soft: 0 14px 36px rgba(0, 0, 0, 0.24);
       --radius: 28px;
       --radius-card: 22px;
       --container: 1180px;
@@ -40,8 +40,9 @@
       font-family: Inter, Arial, Helvetica, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at top left, rgba(255, 212, 223, 0.65), transparent 34rem),
-        radial-gradient(circle at 88% 8%, rgba(189, 232, 211, 0.7), transparent 28rem),
+        radial-gradient(circle at 8% 6%, rgba(255, 196, 0, 0.18), transparent 28rem),
+        radial-gradient(circle at 90% 12%, rgba(255, 48, 48, 0.18), transparent 26rem),
+        linear-gradient(180deg, #090909 0%, #14110a 42%, #080808 100%),
         var(--bg);
       line-height: 1.55;
     }
@@ -69,8 +70,8 @@
       position: sticky;
       top: 0;
       z-index: 20;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.7);
-      background: rgba(255, 248, 239, 0.82);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(7, 7, 7, 0.78);
       backdrop-filter: blur(18px);
     }
 
@@ -85,21 +86,33 @@
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      font-size: 24px;
-      font-weight: 900;
+      gap: 6px;
+      font-size: 25px;
+      font-weight: 950;
       letter-spacing: 0;
+      text-transform: uppercase;
     }
 
     .brand-mark {
-      width: 40px;
+      width: 46px;
       height: 40px;
       display: grid;
       place-items: center;
-      border-radius: 14px;
-      color: #ffffff;
-      background: linear-gradient(135deg, var(--accent), #ffb347);
-      box-shadow: 0 10px 24px rgba(255, 107, 74, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 12px;
+      color: var(--yellow);
+      background: #000000;
+      font-size: 14px;
+      font-weight: 950;
+      box-shadow: 0 10px 26px rgba(255, 196, 0, 0.14);
+    }
+
+    .brand-my {
+      color: var(--yellow);
+    }
+
+    .brand-room {
+      color: var(--accent);
     }
 
     .nav-links {
@@ -112,15 +125,15 @@
     .nav-links a {
       padding: 10px 13px;
       border-radius: 999px;
-      color: var(--muted);
+      color: rgba(255, 255, 255, 0.74);
       font-weight: 700;
       font-size: 15px;
       transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
     }
 
     .nav-links a:hover {
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.82);
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
       transform: translateY(-1px);
     }
 
@@ -138,12 +151,12 @@
       padding: 13px 20px;
       border: 0;
       border-radius: 999px;
-      background: var(--accent);
+      background: linear-gradient(135deg, var(--accent), #ff5a33);
       color: #ffffff;
       font-weight: 850;
       font-size: 15px;
       cursor: pointer;
-      box-shadow: 0 14px 28px rgba(255, 107, 74, 0.27);
+      box-shadow: 0 16px 34px rgba(255, 48, 48, 0.26);
       transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
       white-space: nowrap;
     }
@@ -151,41 +164,41 @@
     .button:hover {
       transform: translateY(-2px);
       background: var(--accent-dark);
-      box-shadow: 0 18px 36px rgba(255, 107, 74, 0.32);
+      box-shadow: 0 20px 42px rgba(255, 48, 48, 0.32);
     }
 
     .button.secondary {
-      color: var(--text);
-      background: #ffffff;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
       border: 1px solid var(--line);
       box-shadow: var(--shadow-soft);
     }
 
     .button.secondary:hover {
-      background: var(--surface-warm);
+      background: rgba(255, 255, 255, 0.14);
       box-shadow: var(--shadow);
     }
 
     .header-booking {
       background: var(--yellow);
-      color: var(--text);
-      box-shadow: 0 14px 28px rgba(255, 190, 70, 0.28);
+      color: #0b0b0b;
+      box-shadow: 0 14px 28px rgba(255, 196, 0, 0.28);
     }
 
     .header-booking:hover {
-      background: #ffd35f;
-      box-shadow: 0 18px 36px rgba(255, 190, 70, 0.34);
+      background: var(--yellow-soft);
+      box-shadow: 0 18px 36px rgba(255, 196, 0, 0.34);
     }
 
     .admin-login {
-      background: #ffffff;
-      color: var(--text);
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
       border: 1px solid var(--line);
       box-shadow: var(--shadow-soft);
     }
 
     .admin-login:hover {
-      background: var(--surface-warm);
+      background: rgba(255, 255, 255, 0.14);
       box-shadow: var(--shadow);
     }
 
@@ -199,7 +212,7 @@
       height: 46px;
       border: 0;
       border-radius: 16px;
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
       box-shadow: var(--shadow-soft);
       cursor: pointer;
     }
@@ -210,7 +223,7 @@
       height: 2px;
       margin: 5px auto;
       border-radius: 999px;
-      background: var(--text);
+      background: #ffffff;
       transition: transform 0.2s ease, opacity 0.2s ease;
     }
 
@@ -248,10 +261,10 @@
       gap: 8px;
       margin-bottom: 18px;
       padding: 8px 13px;
-      border: 1px solid rgba(255, 107, 74, 0.22);
+      border: 1px solid rgba(255, 196, 0, 0.28);
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.72);
-      color: var(--accent-dark);
+      background: rgba(255, 196, 0, 0.1);
+      color: var(--yellow);
       font-weight: 800;
       font-size: 14px;
     }
@@ -290,8 +303,8 @@
       overflow: hidden;
       border-radius: 38px;
       background:
-        linear-gradient(140deg, rgba(255, 107, 74, 0.94), rgba(255, 179, 71, 0.9) 45%, rgba(189, 232, 211, 0.9)),
-        #ffb347;
+        linear-gradient(135deg, rgba(255, 48, 48, 0.95), rgba(255, 196, 0, 0.92)),
+        #ff3030;
       box-shadow: var(--shadow);
       isolation: isolate;
     }
@@ -301,7 +314,7 @@
       content: "";
       position: absolute;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.38);
+      background: rgba(0, 0, 0, 0.22);
       z-index: -1;
     }
 
@@ -334,8 +347,8 @@
       aspect-ratio: 1 / 0.64;
       margin: 0 auto 18px;
       border-radius: 42px;
-      background: rgba(255, 255, 255, 0.35);
-      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.22), 0 18px 45px rgba(112, 58, 28, 0.2);
+      background: rgba(0, 0, 0, 0.22);
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.16), 0 18px 45px rgba(0, 0, 0, 0.24);
       position: relative;
     }
 
@@ -346,10 +359,10 @@
       display: grid;
       place-items: center;
       border-radius: 20px;
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--text);
+      background: #0b0b0b;
+      color: #ffffff;
       font-size: 27px;
-      box-shadow: 0 12px 24px rgba(88, 53, 29, 0.14);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
     }
 
     .scene-table span:nth-child(1) {
@@ -374,7 +387,7 @@
       padding: 22px;
       border: 1px solid rgba(255, 255, 255, 0.34);
       border-radius: 28px;
-      background: rgba(255, 255, 255, 0.22);
+      background: rgba(7, 7, 7, 0.32);
       backdrop-filter: blur(16px);
       font-size: 22px;
       font-weight: 900;
@@ -418,16 +431,16 @@
     .card {
       min-height: 100%;
       padding: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--line);
       border-radius: var(--radius-card);
-      background: rgba(255, 255, 255, 0.78);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.045));
       box-shadow: var(--shadow-soft);
       transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
     }
 
     .card:hover {
       transform: translateY(-6px);
-      border-color: rgba(255, 107, 74, 0.24);
+      border-color: rgba(255, 196, 0, 0.38);
       box-shadow: var(--shadow);
     }
 
@@ -438,7 +451,7 @@
       place-items: center;
       margin-bottom: 18px;
       border-radius: 18px;
-      background: var(--bg-soft);
+      background: linear-gradient(135deg, rgba(255, 196, 0, 0.16), rgba(255, 48, 48, 0.18));
       font-size: 25px;
     }
 
@@ -460,7 +473,8 @@
       min-height: 92px;
       padding: 20px;
       border-radius: 22px;
-      background: var(--surface);
+      background: rgba(255, 255, 255, 0.075);
+      border: 1px solid var(--line);
       box-shadow: var(--shadow-soft);
       font-weight: 850;
       transition: transform 0.2s ease, background 0.2s ease;
@@ -468,7 +482,7 @@
 
     .audience-card:hover {
       transform: translateY(-4px);
-      background: var(--surface-warm);
+      background: rgba(255, 196, 0, 0.12);
     }
 
     .audience-dot {
@@ -478,18 +492,20 @@
       display: grid;
       place-items: center;
       border-radius: 16px;
-      background: var(--mint);
+      background: var(--yellow);
+      color: #0b0b0b;
       font-size: 22px;
     }
 
     .events {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 241, 221, 0.82), rgba(255, 255, 255, 0));
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 48, 48, 0.08), rgba(255, 196, 0, 0.07), rgba(255, 255, 255, 0));
     }
 
     .event-panel {
       padding: clamp(28px, 5vw, 46px);
       border-radius: var(--radius);
-      background: #ffffff;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.045));
+      border: 1px solid var(--line);
       box-shadow: var(--shadow);
     }
 
@@ -502,14 +518,14 @@
     .event-card {
       padding: 22px;
       border-radius: 22px;
-      background: linear-gradient(145deg, var(--surface-warm), #ffffff);
+      background: rgba(255, 255, 255, 0.075);
       border: 1px solid var(--line);
       transition: transform 0.2s ease, border-color 0.2s ease;
     }
 
     .event-card:hover {
       transform: translateY(-5px);
-      border-color: rgba(255, 107, 74, 0.28);
+      border-color: rgba(255, 196, 0, 0.34);
     }
 
     .event-card strong {
@@ -527,7 +543,8 @@
     .stat {
       padding: 28px 22px;
       border-radius: 24px;
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.075);
+      border: 1px solid var(--line);
       box-shadow: var(--shadow-soft);
       text-align: center;
     }
@@ -535,7 +552,7 @@
     .stat strong {
       display: block;
       margin-bottom: 8px;
-      color: var(--accent-dark);
+      color: var(--yellow);
       font-size: clamp(31px, 4vw, 46px);
       line-height: 1;
     }
@@ -553,8 +570,9 @@
       padding: clamp(28px, 5vw, 54px);
       border-radius: 34px;
       background:
-        linear-gradient(135deg, rgba(255, 212, 223, 0.55), rgba(207, 230, 255, 0.55)),
-        #ffffff;
+        linear-gradient(135deg, rgba(255, 48, 48, 0.18), rgba(255, 196, 0, 0.16)),
+        rgba(255, 255, 255, 0.055);
+      border: 1px solid var(--line);
       box-shadow: var(--shadow);
     }
 
@@ -563,7 +581,7 @@
       display: grid;
       place-items: center;
       border-radius: 28px;
-      background: rgba(255, 255, 255, 0.64);
+      background: rgba(0, 0, 0, 0.28);
       font-size: 74px;
     }
 
@@ -577,7 +595,8 @@
       gap: 16px;
       padding: 26px;
       border-radius: 24px;
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.075);
+      border: 1px solid var(--line);
       box-shadow: var(--shadow-soft);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
@@ -602,8 +621,8 @@
     .tag {
       padding: 7px 11px;
       border-radius: 999px;
-      background: var(--bg-soft);
-      color: var(--accent-dark);
+      background: rgba(255, 196, 0, 0.13);
+      color: var(--yellow);
       font-weight: 800;
       font-size: 13px;
     }
@@ -622,7 +641,8 @@
     .review-card {
       padding: 28px;
       border-radius: 24px;
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.075);
+      border: 1px solid var(--line);
       box-shadow: var(--shadow-soft);
     }
 
@@ -643,7 +663,7 @@
       padding: clamp(34px, 6vw, 64px);
       border-radius: 36px;
       background:
-        linear-gradient(135deg, rgba(255, 107, 74, 0.92), rgba(255, 179, 71, 0.92)),
+        linear-gradient(135deg, rgba(255, 48, 48, 0.94), rgba(255, 196, 0, 0.92)),
         var(--accent);
       color: #ffffff;
       box-shadow: var(--shadow);
@@ -668,17 +688,17 @@
     }
 
     .cta-panel .button {
-      background: #ffffff;
-      color: var(--accent-dark);
-      box-shadow: 0 14px 28px rgba(89, 55, 33, 0.18);
+      background: #0b0b0b;
+      color: #ffffff;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
     }
 
     .cta-panel .button:hover {
-      background: var(--surface-warm);
+      background: #1a1a1a;
     }
 
     .cta-panel .button.secondary {
-      background: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.16);
       color: #ffffff;
       border-color: rgba(255, 255, 255, 0.42);
     }
@@ -716,7 +736,7 @@
       border: 1px solid rgba(255, 255, 255, 0.46);
       border-radius: 18px;
       background: rgba(255, 255, 255, 0.94);
-      color: var(--text);
+      color: #111111;
       font: inherit;
       outline: none;
       transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
@@ -754,7 +774,7 @@
     .site-footer {
       padding: 34px 0;
       border-top: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.46);
+      background: #050505;
     }
 
     .footer-grid {
@@ -796,7 +816,8 @@
         gap: 6px;
         padding: 18px;
         border-radius: 24px;
-        background: rgba(255, 255, 255, 0.96);
+        background: rgba(8, 8, 8, 0.96);
+        border: 1px solid var(--line);
         box-shadow: var(--shadow);
         opacity: 0;
         pointer-events: none;
@@ -861,7 +882,7 @@
       }
 
       .brand-mark {
-        width: 36px;
+        width: 42px;
         height: 36px;
       }
 
@@ -956,8 +977,8 @@
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="#top" aria-label="MyRoom">
-        <span class="brand-mark">M</span>
-        <span>MyRoom</span>
+        <span class="brand-mark">MY</span>
+        <span><span class="brand-my">MY</span><span class="brand-room">ROOM</span></span>
       </a>
 
       <nav class="nav-links" aria-label="Главное меню">
@@ -987,7 +1008,7 @@
       <div class="container hero-grid">
         <div>
           <div class="eyebrow">С 2016 года в Алматы и Астане</div>
-          <h1>MyRoom — место для друзей</h1>
+          <h1><span class="brand-my">MY</span><span class="brand-room">ROOM</span> — место для друзей</h1>
           <p class="hero-text">Антикафе для живого общения, игр, праздников и отдыха в Алматы и Астане</p>
           <div class="actions">
             <a class="button" href="#contacts">Забронировать комнату</a>
@@ -1279,7 +1300,7 @@
   <footer class="site-footer">
     <div class="container footer-grid">
       <div>
-        <div class="footer-title">MyRoom</div>
+        <div class="footer-title"><span class="brand-my">MY</span><span class="brand-room">ROOM</span></div>
         <p>Место для друзей</p>
         <p>Алматы и Астана</p>
       </div>
