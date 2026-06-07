@@ -124,6 +124,12 @@
       transform: translateY(-1px);
     }
 
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .button {
       display: inline-flex;
       align-items: center;
@@ -169,6 +175,22 @@
     .header-booking:hover {
       background: #ffd35f;
       box-shadow: 0 18px 36px rgba(255, 190, 70, 0.34);
+    }
+
+    .admin-login {
+      background: #ffffff;
+      color: var(--text);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .admin-login:hover {
+      background: var(--surface-warm);
+      box-shadow: var(--shadow);
+    }
+
+    .mobile-admin-link {
+      display: none;
     }
 
     .menu-toggle {
@@ -796,7 +818,7 @@
         display: block;
       }
 
-      .nav > .button {
+      .nav-actions {
         margin-left: auto;
       }
 
@@ -843,8 +865,12 @@
         height: 36px;
       }
 
-      .nav > .button {
+      .nav-actions {
         display: none;
+      }
+
+      .mobile-admin-link {
+        display: block;
       }
 
       .nav-links {
@@ -940,9 +966,13 @@
         <a href="#events">Мероприятия</a>
         <a href="#branches">Филиалы</a>
         <a href="#contacts">Контакты</a>
+        <a class="mobile-admin-link" href="/admin">Вход админа</a>
       </nav>
 
-      <a class="button header-booking" href="#contacts">Забронировать</a>
+      <div class="nav-actions">
+        <a class="button admin-login" href="/admin">Вход админа</a>
+        <a class="button header-booking" href="#contacts">Забронировать</a>
+      </div>
 
       <button class="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">
         <span></span>
