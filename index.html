@@ -446,6 +446,105 @@
       text-wrap: balance;
     }
 
+    .social-panel {
+      display: grid;
+      grid-template-columns: 0.78fr 1.22fr;
+      gap: 24px;
+      align-items: center;
+      padding: clamp(26px, 5vw, 46px);
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      background:
+        linear-gradient(135deg, rgba(255, 48, 48, 0.11), rgba(255, 196, 0, 0.1)),
+        rgba(255, 255, 255, 0.055);
+      box-shadow: var(--shadow);
+    }
+
+    .social-kicker {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 16px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: rgba(255, 196, 0, 0.12);
+      color: var(--yellow);
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .photo-wall {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .photo-tile {
+      position: relative;
+      min-height: 180px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 26px;
+      background:
+        linear-gradient(160deg, rgba(255, 196, 0, 0.88), rgba(255, 48, 48, 0.88)),
+        #151515;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .photo-tile:nth-child(2) {
+      margin-top: 26px;
+      background:
+        linear-gradient(160deg, rgba(255, 48, 48, 0.9), rgba(10, 10, 10, 0.88)),
+        #151515;
+    }
+
+    .photo-tile:nth-child(3) {
+      background:
+        linear-gradient(160deg, rgba(255, 196, 0, 0.82), rgba(10, 10, 10, 0.9)),
+        #151515;
+    }
+
+    .photo-tile:hover {
+      transform: translateY(-6px) rotate(-1deg);
+      border-color: rgba(255, 196, 0, 0.42);
+      box-shadow: var(--shadow);
+    }
+
+    .photo-tile::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 20px;
+    }
+
+    .photo-tile strong {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 22px;
+      z-index: 1;
+      color: #ffffff;
+      font-size: 20px;
+      line-height: 1.15;
+      text-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+    }
+
+    .photo-tile span {
+      position: absolute;
+      top: 22px;
+      left: 22px;
+      z-index: 1;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: rgba(0, 0, 0, 0.42);
+      color: var(--yellow);
+      font-size: 22px;
+    }
+
     .section-head {
       max-width: 760px;
       margin: 0 auto 36px;
@@ -1029,7 +1128,8 @@
       }
 
       .info-grid,
-      .explain-panel {
+      .explain-panel,
+      .social-panel {
         grid-template-columns: 1fr;
       }
 
@@ -1127,8 +1227,13 @@
       .stats-grid,
       .rent-grid,
       .booking-steps,
-      .included-list {
+      .included-list,
+      .photo-wall {
         grid-template-columns: 1fr;
+      }
+
+      .photo-tile:nth-child(2) {
+        margin-top: 0;
       }
 
       .card,
@@ -1234,7 +1339,36 @@
               <span>🎤</span>
               <span>🎮</span>
             </div>
-            <div class="feature-strip">Настольные игры • Караоке • PlayStation • VIP-комнаты</div>
+            <div class="feature-strip">PS5 • Караоке • Проектор • Настольный футбол • VIP-комнаты</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container social-panel">
+        <div>
+          <div class="social-kicker">@myroom.almaty</div>
+          <h2>Атмосфера, которую хочется снять в stories</h2>
+          <p>Обновили визуал сайта под живой social-first формат: больше ощущения настоящей компании, игровых вечеров, праздников и комнат, где можно шуметь, смеяться и отдыхать офлайн.</p>
+          <div class="actions">
+            <a class="button" href="#contacts">Забронировать встречу</a>
+            <a class="button secondary" href="https://www.instagram.com/myroom.almaty">Открыть Instagram</a>
+          </div>
+        </div>
+
+        <div class="photo-wall" aria-label="Атмосфера MyRoom">
+          <div class="photo-tile">
+            <span>🎮</span>
+            <strong>PS5-вечер для большой компании</strong>
+          </div>
+          <div class="photo-tile">
+            <span>🎤</span>
+            <strong>VIP-комнаты с караоке и проектором</strong>
+          </div>
+          <div class="photo-tile">
+            <span>🎲</span>
+            <strong>Настолки, чай и живое общение</strong>
           </div>
         </div>
       </div>
@@ -1254,10 +1388,10 @@
           <div class="included-list">
             <div class="included-item"><span>☕</span>Чай и печенье</div>
             <div class="included-item"><span>🎲</span>Настольные игры</div>
-            <div class="included-item"><span>🎮</span>PlayStation</div>
-            <div class="included-item"><span>🎤</span>Караоке</div>
-            <div class="included-item"><span>🎱</span>Бильярд</div>
-            <div class="included-item"><span>＋</span>И многое другое</div>
+            <div class="included-item"><span>🎮</span>PlayStation 5</div>
+            <div class="included-item"><span>🎤</span>Караоке и проектор</div>
+            <div class="included-item"><span>⚽</span>Футбол и теннис</div>
+            <div class="included-item"><span>＋</span>VIP-комнаты</div>
           </div>
         </div>
       </div>
@@ -1288,13 +1422,13 @@
           </article>
           <article class="card">
             <div class="icon">🎮</div>
-            <h3>PlayStation</h3>
-            <p>Соревнования, кооперативные игры и отдых для компаний друзей.</p>
+            <h3>PlayStation 5</h3>
+            <p>Соревнования, кооперативные игры и игровые вечера для больших компаний.</p>
           </article>
           <article class="card">
-            <div class="icon">🎱</div>
-            <h3>Бильярд</h3>
-            <p>Хороший способ переключиться, пообщаться и добавить вечеру движения.</p>
+            <div class="icon">⚽</div>
+            <h3>Футбол и теннис</h3>
+            <p>Активные игры, которые легко включают в отдых даже новых гостей.</p>
           </article>
           <article class="card">
             <div class="icon">☕</div>
@@ -1602,7 +1736,7 @@
       </div>
       <div class="footer-links">
         <a href="https://wa.me/77000000000">WhatsApp: +7 700 000 00 00</a>
-        <a href="#">Instagram: @myroom.placeholder</a>
+        <a href="https://www.instagram.com/myroom.almaty">Instagram: @myroom.almaty</a>
         <a href="/admin">Вход администратора</a>
       </div>
       <p class="copyright">© 2026 MyRoom. Все права защищены.</p>
